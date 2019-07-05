@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 单选按钮 -->
+        <h3>{{gender}}</h3>
+        <input type="radio" name='gender' value="男" v-model="gender">男
+        <input type="radio" name='gender' value="女" v-model="gender">女
+
+        <!-- 复选按钮 -->
+        <h4>{{hobby}}</h4>
+        <input type="checkbox" name='hobby' value="吃饭" v-model="hobby">吃饭
+        <input type="checkbox" name='hobby' value="睡觉" v-model="hobby">睡觉
+        <input type="checkbox" name='hobby' value="打游戏" v-model="hobby">打游戏
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'ok',
+            gender: "男",
+            hobby: []
+        },
+
+    })
+</script>
+
+</html>

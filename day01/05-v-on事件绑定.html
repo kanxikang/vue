@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 事件 -->
+    <!-- <input type="button" value="按钮" id="app" v-on:click='alertShow'> -->
+    <!-- 传参 -->
+    <!-- <input type="button" value="按钮" id="app" v-on:click='alertShow("发大水发撒")'> -->
+    <!-- 简写形式 -->
+    <input type="button" value="按钮" id="app" @click='alertShow("发大水发撒")'>
+
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'ok'
+        },
+        methods: {
+            alertShow(a) {
+                alert(a)
+            }
+        },
+    })
+</script>
+
+</html>

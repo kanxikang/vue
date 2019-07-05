@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class=" panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading">添加面板</div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputName2">id</label>
+                        <input type="text" class="form-control" id="exampleInputName2" v-model="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail2">name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail2" v-model="name">
+                    </div>
+                    <button type="submit" class="btn btn-primary" @click.prevent="add">添加</button>
+                    <div class="form-group">
+                        <label for="exampleInputEmail2">筛选</label>
+                        <input type="text" class="form-control" id="exampleInputEmail2" v-model="keywords" v-focus>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in query()" :key="item.id">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.ctime | fileDate }}</td>
+                        <td>
+                            <a href="javascript:;" @click.prevent="del(item.id)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="../lib/js/vue.js"></script>
+<!-- <script src="./lib/js/bootstrap.min.js"></script> -->
+<script>
+    Vue.directive('focus', {
+        bind(el) {
+
+        },
+        inserted(el) {
+            el.focus()
+        },
+        updated(el) {
+
+        },
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            keywords: '',
+            list: [
+                { id: 1, name: '张三', ctime: new Date() },
+                { id: 2, name: '李四', ctime: new Date() },
+                { id: 3, name: '王五', ctime: new Date() }
+            ]
+        },
+        methods: {
+            add() {
+                this.list.push({ id: this.id, name: this.name, ctime: new Date() })
+                this.id = this.name = ''
+            },
+            del(id) {
+                let a = this.list.findIndex((a) => {
+                    console.log(1);
+                    if (id == a.id) {
+                        return true
+                    }
+                })
+                this.$delete(this.list, a)
+            },
+            query() {
+                return this.list.filter((v, i) => {
+                    if (v.name.includes(this.keywords)) {
+                        return true
+                    }
+                })
+            }
+        },
+        filters: {
+            fileDate(a) {
+                let data = new Date(a)
+                let y = data.getFullYear()
+                let m = (data.getMonth() + 1).toString().padStart('2', '0')
+                let d = data.getDay().toString().padStart('2', '0')
+                let hh = data.getHours().toString().padStart('2', 0)
+                let mm = data.getMinutes().toString().padStart('2', 0)
+                let ss = data.getSeconds().toString().padStart('2', 0)
+                return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+            }
+        },
+    })
+</script>
+
+</html>

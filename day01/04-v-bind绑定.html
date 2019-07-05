@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <a href="##" v-bind:title="mytitle">这是一个a标签</a> -->
+        <!-- 简写形式 -->
+        <!-- <a href="##" :title="mytitle">这是一个a标签</a> -->
+        <a :href="msg">百度一下,你就知道</a>
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            mytitle: '不对、是象拔蚌',
+            msg: 'http://www.baidu.com'
+        }
+    })
+</script>
+
+</html>
