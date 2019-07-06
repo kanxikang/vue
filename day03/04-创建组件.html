@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/css/animate.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <login></login>
+    </div>
+    <template id="dv1">
+        <ul>
+            这是一个无序列表
+            <li>列表项一</li>
+            <li>列表项二</li>
+            <li>列表项三</li>
+        </ul>
+    </template>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    // 方式一
+    /* let com = Vue.extend({
+        template: '<h3>这是一个组件一</h3>'
+    }) 
+    Vue.component("zujian", com) */
+
+    // 方式二
+    // Vue.component('zujian',Vue.extend({
+    //     template:'<h3>这是一个组件二</h3>'
+    // }))
+
+    // 方式三
+    // Vue.component('zujian', {
+    //     template: '<h3>这是一个组件三</h3>'
+    // })
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+        },
+        // 创建私有组件
+        components: {
+            login: {
+                template: "#dv1"
+            }
+        }
+    });
+</script>
+
+</html>

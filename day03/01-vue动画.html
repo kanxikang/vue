@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/css/animate.min.css">
+</head>
+<style>
+    .my-enter,
+    .my-leave-to {
+        transform: translateX(200px)
+    }
+
+    .my-enter-active,
+    .my-leave-active {
+        transition: all 1s;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <input type="button" value="按钮" @click.prevent="flag=!flag">
+        <transition name='my'>
+            <h3 v-if="flag">{{msg}}</h3>
+        </transition>
+    </div>
+    <div id="app1" style="margin-top: 50px">
+        <input type="button" value="按钮2" @click.prevent="flag=!flag">
+        <transition enter-active-class='animated fadeOutUp' leave-active-class='animated fadeOutUp' :duration=500>
+            <!-- fadeOutLeftBig -->
+            <h2 v-if="flag">{{ msg }}</h2>
+        </transition>
+    </div>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '张浩要给刘悦生猴子',
+            flag: false
+        },
+        methods: {
+
+        }
+    });
+
+    // 使用第三方库来实现动画
+    new Vue({
+        el: '#app1',
+        data: {
+            flag: false,
+            msg: '这是引入第三方库'
+        }
+    })
+</script>
+
+</html>

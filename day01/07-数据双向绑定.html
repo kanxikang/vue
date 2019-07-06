@@ -20,14 +20,18 @@
         <input type="checkbox" name='hobby' value="吃饭" v-model="hobby">吃饭
         <input type="checkbox" name='hobby' value="睡觉" v-model="hobby">睡觉
         <input type="checkbox" name='hobby' value="打游戏" v-model="hobby">打游戏
+        <br>
+        <br>
+        <input type="text" v-model.number="msg">
+        <p>{{ msg }}</p>
     </div>
 </body>
-<script src="./lib/vue.js"></script>
+<script src="../lib/js/vue.js"></script>
 <script>
     let vm = new Vue({
         el: '#app',
         data: {
-            msg: 'ok',
+            msg: '',
             gender: "男",
             hobby: []
         },

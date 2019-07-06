@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/css/animate.min.css">
+</head>
+<style>
+    .aaa {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <input type="button" value="按钮" @click.prevent="flag=!flag">
+        <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter">
+            <div class="aaa"></div>
+            <!-- :duration='500' -->
+        </transition>
+    </div>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '张浩爱刘悦',
+            flag: false
+        },
+        methods: {
+            beforeEnter(el) {
+                el.style
+            },
+            enter(el) {
+
+            },
+            afterEnter(el) {
+
+            },
+        }
+    });
+</script>
+
+</html>
