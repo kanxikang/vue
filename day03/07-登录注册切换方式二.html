@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .v-enter,
+    .v-leave-to {
+        opacity: 0;
+        transform: translateX(200px)
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+        transition: all .5s;
+    }
+    h1 {
+        width: 200px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <a href="" @click.prevent="com='login'">登录</a>
+        <a href="" @click.prevent="com='register'">注册</a>
+        <a href="" @click.prevent="com='yidong'">移动注册</a>
+        <transition mode='out-in'>
+            <component :is="com"></component>
+        </transition>
+    </div>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            com: 'register'
+        },
+        methods: {
+
+        },
+        components: {
+            login: {
+                template: '<h1>这是login</h1>'
+            },
+            register: {
+                template: '<h1>这是register</h1>'
+            },
+            yidong: {
+                template: '<h1>这是yidong</h1>'
+            }
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3 ref="h3">这是一个h3</h3>
+        <comm ref="comm"></comm>
+        <input type="button" value="按钮" @click.prevent="aaa">
+    </div>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var com = {
+        template: "<h1>这是一个h1{{mag}}</h1>",
+        data() {
+            return {
+                mag: '子组件'
+            }
+        },
+        methods: {
+            fn() {
+                alert('fdsaf')
+            }
+        },
+    }
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+            aaa() {
+                console.log(this.$refs.comm.mag);
+            }
+        },
+        components: {
+            comm: com
+        }
+    });
+</script>
+
+</html>

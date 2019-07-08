@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <com @func='getdata'></com>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="(item,i) in list" :key="i">
+                <span class="badge">{{ item.user }}</span>
+                {{ item.content }}
+            </li>
+        </ul>
+    </div>
+    <template id="com">
+        <div>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="exampleInputName2">name</label>
+                    <input type="text" class="form-control" id="exampleInputName1" v-model="name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName2">content</label>
+                    <input type="text" class="form-control" id="exampleInputName2" v-model="content">
+                </div>
+                <input type="button" class="btn btn-primary" value="添加" @click.prevent="add">
+                <br>
+                <br>
+            </form>
+        </div>
+    </template>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                // { user: '飞飞', content: '我的jj像飞机' },
+                // { user: '飞呀飞', content: '我的jj像钉钉' }
+            ]
+        },
+        created() {
+            this.list = JSON.parse(localStorage.getItem('list') || '[]')
+        },
+        methods: {
+            getdata(data) {
+                this.list = data
+                console.log(data);
+            }
+        },
+        components: {
+            com: {
+                template: '#com',
+                data() {
+                    return {
+                        name: '',
+                        content: ''
+                    }
+                },
+                methods: {
+                    add() {
+                        // 通过双向绑定获取表单数据
+                        let content = { user: this.name, content: this.content }
+                        this.name = this.content = ''
+                        // 获取localStorage里面的数据
+                        let list = JSON.parse(localStorage.getItem('list') || '[]')
+                        // 讲数据添加到list中
+                        list.unshift(content)
+                        // 讲添加完数据的list从新存放到localStorage中
+                        localStorage.setItem('list', JSON.stringify(list))
+                        // 调用$emit讲数据传递给父组件
+                        this.$emit('func', list)
+                    }
+                }
+            },
+        }
+    });
+</script>
+
+</html>

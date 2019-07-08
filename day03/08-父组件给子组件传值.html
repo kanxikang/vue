@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="按钮par" @click.prevent="parentFn">
+        <br>
+        <br>
+        <com1 @fucn='parentFn'></com1>
+    </div>
+    <template id="com1">
+        <div>
+            <input type="button" value="按钮son" @click.prevent="sonFn">
+        </div>
+    </template>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '这是父组件方法'
+        },
+        methods: {
+            parentFn() {
+                console.log(this.msg);
+            }
+        },
+        components: {
+            com1: {
+                template: '#com1',
+                data() {
+                    return {
+                        msg: '这是子组件方法'
+                    }
+                },
+                methods: {
+                    sonFn() {
+                        this.$emit('fucn')
+                        console.log();
+                    }
+                },
+            }
+        }
+    });
+</script>
+
+</html>

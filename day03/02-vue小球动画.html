@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="../lib/css/animate.min.css">
 </head>
 <style>
     .aaa {
@@ -21,7 +20,7 @@
     <div id="app">
         <input type="button" value="按钮" @click.prevent="flag=!flag">
         <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter">
-            <div class="aaa"></div>
+            <div class="aaa" v-show="flag"></div>
             <!-- :duration='500' -->
         </transition>
     </div>
@@ -36,13 +35,16 @@
         },
         methods: {
             beforeEnter(el) {
-                el.style
+                el.style.transform = 'translate(0,0)'
             },
-            enter(el) {
-
+            enter(el, done) {
+                el.offsetTop
+                el.style.transform = 'translate(100px,300px)'
+                el.style.transition = 'all 1s'
+                done()
             },
             afterEnter(el) {
-
+                this.flag = !this.flag
             },
         }
     });
