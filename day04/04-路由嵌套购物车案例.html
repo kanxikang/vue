@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #app {
+        width: 300px;
+        height: 300px;
+        border: 1px solid red
+    }
+</style>
+
+<body>
+    <div id="app">
+        <router-link to='/user'>个人中心</router-link>
+        <router-link to='/shopping'>购物车</router-link>
+        <hr>
+        <router-view></router-view>
+    </div>
+    <template id="user">
+        <div>
+            <template>
+                <div>
+                    <router-link to='/user/login'>登录</router-link>
+                    <router-link to='/user/register'>注册</router-link>
+                    <router-view></router-view>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template id="login">
+        <div>
+            <h1>这是登录模块</h1>
+        </div>
+    </template>
+    <template id="register">
+        <div>
+            <h1>这是注册模块</h1>
+        </div>
+    </template>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script src="../lib/js/vue-router.min.js"></script>
+<script>
+    var user = {
+        template: '#user'
+    }
+    var login = {
+        template: '#login'
+    }
+    var register = {
+        template: '#register'
+    }
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/user',
+                component: user,
+                children: [
+                    {
+                        path: 'login',
+                        component: login
+                    },
+                    {
+                        path: 'register',
+                        component: register
+                    }
+                ]
+            }
+        ]
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+
+        },
+        router
+    });
+</script>
+
+</html>

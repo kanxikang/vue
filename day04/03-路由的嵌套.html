@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to='/parent'>点击父亲</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="parent">
+        <div>
+            <h1>这是父亲</h1>
+            <router-link to='/parent/login'>点击登录</router-link>
+            <router-link to='/parent/register'>点击注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+    <template id="login">
+        <div>
+            <h1>登录模块</h1>
+        </div>
+    </template>
+    <template id="register">
+        <div>
+            <h1>注册模块</h1>
+        </div>
+    </template>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script src="../lib/js/vue-router.min.js"></script>
+<script>
+    var login = {
+        template: '#login'
+    }
+    var register = {
+        template: '#register'
+    }
+    var parent = {
+        template: '#parent'
+    }
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/parent',
+                component: parent,
+                children: [
+                    {
+                        path: 'login',
+                        component: login
+                    },
+                    {
+                        path: 'register',
+                        component: register
+                    }
+                ]
+            },
+        ]
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+
+        },
+        router
+    });
+</script>
+
+</html>

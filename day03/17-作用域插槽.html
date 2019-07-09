@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .current {
+        color: orange
+    }
+</style>
+
+<body>
+    <div id="app">
+        <com>
+            <template v-slot='slotProps'>
+                <strong v-if="slotProps.info.id==1" class="current">{{slotProps.info.name}}</strong>
+            </template>
+        </com>
+    </div>
+    <template id="tpl">
+        <div>
+            <ul>
+                <li v-for="item in list">
+                    <slot :info='item'>{{item.name}}</slot>
+                </li>
+            </ul>
+        </div>
+    </template>
+</body>
+<script src="../lib/js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+
+        },
+        components: {
+            com: {
+                template: '#tpl',
+                data() {
+                    return {
+                        list: [
+                            { id: 1, name: '张三' },
+                            { id: 2, name: '李四' },
+                            { id: 3, name: '飞飞' }
+                        ]
+                    }
+                },
+            }
+        }
+    }); 
+</script>
+
+</html>
